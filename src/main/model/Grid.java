@@ -85,7 +85,17 @@ public class Grid {
     }
 
     public void displayBoard() {
+        System.out.print("  ");
+        for (int col = 0; col < boardCells[0].length; col++) {
+            System.out.print(col + " ");
+        }
+        System.out.print("\n  ");
+        for (int col = 0; col < boardCells[0].length; col++) {
+            System.out.print("_ ");
+        }
+        System.out.println();
         for (int i = 0; i < rows; i++) {
+            System.out.print(i + "|");
             for (int j = 0; j < cols; j++) {
                 if (boardCells[i][j].isRevealed()) {
                     if (boardCells[i][j].isMine()) {
