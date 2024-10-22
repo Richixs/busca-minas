@@ -3,12 +3,12 @@ package main.model;
 public class Cell {
     private boolean isMine;
     private boolean revealed;
-    private int nearByMines;
+    private int nearbyMines;
 
     public Cell() {
         this.isMine = false;
         this.revealed = false;
-        this.nearByMines = 0;
+        this.nearbyMines = 0;
     }
 
     public boolean isMine() {
@@ -27,11 +27,11 @@ public class Cell {
         this.revealed = true;
     }
 
-    public int getNearByMines() {
-        return nearByMines;
+    public int getNearbyMines() {
+        return nearbyMines;
     }
 
-    public void incrementNearByMines() {
-        this.nearByMines++;
+    public void setNearbyMines(int mines) {
+        this.nearbyMines = mines;
     }
 }
