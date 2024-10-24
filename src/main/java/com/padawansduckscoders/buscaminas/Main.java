@@ -1,4 +1,4 @@
-package main;
+package com.padawansduckscoders.buscaminas;
 
 import java.util.Scanner;
 import main.model.Grid;
