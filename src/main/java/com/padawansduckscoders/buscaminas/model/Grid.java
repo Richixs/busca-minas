@@ -1,4 +1,4 @@
-package main.model;
+package com.padawansduckscoders.buscaminas.model;
 
 import java.util.Random;;
 

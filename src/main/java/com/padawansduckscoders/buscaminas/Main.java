@@ -1,7 +1,7 @@
 package com.padawansduckscoders.buscaminas;
 
 import java.util.Scanner;
-import main.model.Grid;
+import com.padawansduckscoders.buscaminas.model.Grid;
 
 public class Main {
     public static void main(String[] args) {
