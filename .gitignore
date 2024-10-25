@@ -1,4 +1,5 @@
 # Gradle files
+.vscode/
 .gradle/
 build/
 
