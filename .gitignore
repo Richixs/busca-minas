@@ -65,4 +65,4 @@ Temporary Items
 !gradle-wrapper.jar
 
 build/distributions/
-
+build/tmp/
