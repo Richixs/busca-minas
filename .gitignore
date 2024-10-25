@@ -61,8 +61,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
 build/distributions/
 build/tmp/
+build/tmp/compileJava/
+build/tmp/compileJava/previous-compilation-data.bin
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
