@@ -1,24 +1,12 @@
 package com.padawansduckscoders.buscaminas;
 
-import java.util.Scanner;
-import com.padawansduckscoders.buscaminas.model.Grid;
+import com.padawansduckscoders.buscaminas.view.ConsoleView;
+import com.padawansduckscoders.buscaminas.controller.GameControllerCli;;;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Grid grid = new Grid(10, 10, 10);
-        boolean gameInProgress = true;
-        while (gameInProgress) {
-            grid.displayBoard();
-            System.out.println("Enter row and column: ");
-            int row = scanner.nextInt();
-            int col = scanner.nextInt();
-            boolean result = grid.revealCell(row, col);
-            if (!result) {
-                System.out.println("You hit a mine! Game over!");
-                gameInProgress = false;
-            }
-        }
-        scanner.close();
+        ConsoleView view = new ConsoleView(new GameControllerCli());
+        view.showMenu();
+        view.startGame();
     }
 }

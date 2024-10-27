@@ -110,4 +110,23 @@ public class Grid {
             System.out.println();
         }
     }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public boolean isGameWon() {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (!boardCells[row][col].isMine() && !boardCells[row][col].isRevealed()) {
+                    return false; 
+                }
+            }
+        }
+        return true;
+    }
 }
