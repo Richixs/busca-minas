@@ -2,7 +2,7 @@ package com.padawansduckscoders.buscaminas.controller;
 
 import com.padawansduckscoders.buscaminas.model.Grid;
 
-public class GameController {
+public class GameControllerCli {
     private Grid grid;
     private boolean gameOver;
 

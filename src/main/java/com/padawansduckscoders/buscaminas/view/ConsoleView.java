@@ -1,13 +1,13 @@
 package com.padawansduckscoders.buscaminas.view;
 
 import java.util.Scanner;
-import com.padawansduckscoders.buscaminas.controller.GameController;
+import com.padawansduckscoders.buscaminas.controller.GameControllerCli;
 
 public class ConsoleView {
-    private GameController gameController;
+    private GameControllerCli gameController;
     private Scanner scanner;
 
-    public ConsoleView(GameController gameController) {
+    public ConsoleView(GameControllerCli gameController) {
         this.scanner = new Scanner(System.in);
         this.gameController = gameController;
     }
