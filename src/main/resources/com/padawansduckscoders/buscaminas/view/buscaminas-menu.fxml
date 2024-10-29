@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="620.0" style="-fx-background-color: #1B1B1B;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.padawansduckscoders.buscaminas.controller.MenuController">
+   <children>
+      <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="586.0" fitWidth="285.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/HalfMine.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="293.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/QuarterMine.png" />
+               </image>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+      <VBox fx:id="vboxMenuButtons" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="buttonPlay" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onPlayButtonClick" onMouseEntered="#onPlayMouseEntered" onMouseExited="#onPlayMouseExited" prefHeight="66.0" prefWidth="266.0" style="-fx-border-color: #ffffff; -fx-background-color: #383838; -fx-border-radius: 20; -fx-background-radius: 20;" text="JUGAR" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Modak" size="36.0" />
+               </font>
+               <padding>
+                  <Insets bottom="0.5" />
+               </padding>
+            </Button>
+            <Button fx:id="buttonReport" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onReportButtonClick" onMouseEntered="#onReportMouseEntered" onMouseExited="#onReportMouseExited" prefHeight="66.0" prefWidth="266.0" style="-fx-background-color: #383838; -fx-border-color: ffffff; -fx-border-radius: 20; -fx-background-radius: 20;" text="REPORTAR" textAlignment="CENTER" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Modak" size="36.0" />
+               </font>
+               <padding>
+                  <Insets bottom="0.5" />
+               </padding>
+            </Button>
+            <Button fx:id="buttonExit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onExitButtonClick" onMouseEntered="#onExitMouseEntered" onMouseExited="#onExitMouseExited" prefHeight="66.0" prefWidth="266.0" style="-fx-background-color: #383838; -fx-border-color: ffffff; -fx-border-radius: 20; -fx-background-radius: 20;" text="SALIR" textAlignment="CENTER" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Modak" size="36.0" />
+               </font>
+               <padding>
+                  <Insets bottom="0.5" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
+      <VBox fx:id="vboxPlayButtons" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="66.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="buttonEasy" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onEasyButtonClick" onMouseEntered="#onEasyMouseEntered" onMouseExited="#onEasyMouseExited" prefHeight="66.0" prefWidth="152.0" style="-fx-border-color: #ffffff; -fx-background-color: #383838; -fx-border-radius: 20; -fx-background-radius: 20;" text="FACIL" textFill="WHITE">
+                     <font>
+                        <Font name="Modak" size="36.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="0.5" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonNormal" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNormalButtonClick" onMouseEntered="#onNormalMouseEntered" onMouseExited="#onNormalMouseExited" prefHeight="66.0" prefWidth="152.0" style="-fx-border-color: #ffffff; -fx-background-color: #383838; -fx-border-radius: 20; -fx-background-radius: 20;" text="MEDIO" textFill="WHITE">
+                     <font>
+                        <Font name="Modak" size="36.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="0.5" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonHard" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onHardButtonClick" onMouseEntered="#onHardMouseEntered" onMouseExited="#onHardMouseExited" prefHeight="66.0" prefWidth="152.0" style="-fx-border-color: #ffffff; -fx-background-color: #383838; -fx-border-radius: 20; -fx-background-radius: 20;" text="DIFICIL" textFill="WHITE">
+                     <font>
+                        <Font name="Modak" size="36.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="0.5" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Button fx:id="buttonCustom" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onCustomButtonClick" onMouseEntered="#onCustomMouseEntered" onMouseExited="#onCustomMouseExited" prefHeight="66.0" prefWidth="325.0" style="-fx-border-color: #ffffff; -fx-background-color: #383838; -fx-border-radius: 20; -fx-background-radius: 20;" text="PERSONALIZADO" textFill="WHITE">
+               <font>
+                  <Font name="Modak" size="36.0" />
+               </font>
+               <padding>
+                  <Insets bottom="0.5" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox fx:id="hboxPlayButtons" alignment="TOP_CENTER" prefHeight="66.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="buttonBack" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onBackButtonClick" onMouseEntered="#onBackMouseEntered" onMouseExited="#onBackMouseExited" prefHeight="66.0" prefWidth="152.0" style="-fx-border-color: #ffffff; -fx-background-color: #383838; -fx-border-radius: 20; -fx-background-radius: 20;" text="ATRAS" textFill="WHITE">
+               <font>
+                  <Font name="Modak" size="36.0" />
+               </font>
+               <padding>
+                  <Insets bottom="0.5" />
+               </padding>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="buttonStartGame" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onStartGameButtonClick" onMouseEntered="#onStartGameMouseEntered" onMouseExited="#onStartGameMouseExited" prefHeight="66.0" prefWidth="152.0" style="-fx-border-color: #ffffff; -fx-background-color: #383838; -fx-border-radius: 20; -fx-background-radius: 20;" text="JUGAR" textFill="WHITE">
+               <font>
+                  <Font name="Modak" size="36.0" />
+               </font>
+               <padding>
+                  <Insets bottom="0.5" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" spacing="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+             <ImageView fitHeight="66.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                   <Image url="@../assets/TitleMine.png" />
+                </image>
+               <VBox.margin>
+                  <Insets top="60.0" />
+               </VBox.margin>
+             </ImageView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

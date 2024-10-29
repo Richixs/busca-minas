@@ -31,11 +31,12 @@ application {
 
 javafx {
     version = '17.0.6'
-    modules = ['javafx.controls', 'javafx.fxml']
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
 
 dependencies {
     implementation('org.controlsfx:controlsfx:11.2.1')
+    implementation "org.openjfx:javafx-media:11.2.1"
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
