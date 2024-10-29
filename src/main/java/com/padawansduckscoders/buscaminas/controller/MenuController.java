@@ -12,6 +12,8 @@ public class MenuController {
     
     private HostServices hostServices;
 
+    private final String BUTTONSTYLE = "-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #383838; -fx-border-color: #ffffff;";
+
     public void setHostServices(HostServices hostServices) {
         this.hostServices = hostServices;
     }
@@ -23,15 +25,13 @@ public class MenuController {
 
     @FXML
     protected void onPlayMouseEntered() {
-        String existingStyle = buttonPlay.getStyle();
-        buttonPlay.setStyle(existingStyle + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
+        buttonPlay.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
         buttonPlay.setTextFill(Color.valueOf("#ff0000"));
     }
 
     @FXML
     protected void onPlayMouseExited() {
-        String existingStyle = buttonPlay.getStyle();
-        buttonPlay.setStyle(existingStyle + "-fx-background-color: #383838; -fx-border-color: #ffffff;");
+        buttonPlay.setStyle(BUTTONSTYLE);
         buttonPlay.setTextFill(Color.valueOf("#ffffff"));
     }
 
@@ -44,15 +44,13 @@ public class MenuController {
 
     @FXML
     protected void onReportMouseEntered() {
-        String existingStyle = buttonReport.getStyle();
-        buttonReport.setStyle(existingStyle + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
+        buttonReport.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
         buttonReport.setTextFill(Color.valueOf("#ff0000"));
     }
 
     @FXML
     protected void onReportMouseExited() {
-        String existingStyle = buttonReport.getStyle();
-        buttonReport.setStyle(existingStyle + "-fx-background-color: #383838; -fx-border-color: #ffffff;");
+        buttonReport.setStyle(BUTTONSTYLE);
         buttonReport.setTextFill(Color.valueOf("#ffffff"));
     }
 
@@ -63,15 +61,13 @@ public class MenuController {
 
     @FXML
     protected void onExitMouseEntered() {
-        String existingStyle = buttonExit.getStyle();
-        buttonExit.setStyle(existingStyle + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
+        buttonExit.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
         buttonExit.setTextFill(Color.valueOf("#ff0000"));
     }
 
     @FXML
     protected void onExitMouseExited() {
-        String existingStyle = buttonExit.getStyle();
-        buttonExit.setStyle(existingStyle + "-fx-background-color: #383838; -fx-border-color: #ffffff;");
+        buttonExit.setStyle(BUTTONSTYLE);
         buttonExit.setTextFill(Color.valueOf("#ffffff"));
     }
 }
