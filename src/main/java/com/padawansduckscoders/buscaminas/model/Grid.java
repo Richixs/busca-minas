@@ -1,12 +1,13 @@
 package com.padawansduckscoders.buscaminas.model;
 
-import java.util.Random;;
+import java.util.Random;
 
 public class Grid {
     private Cell[][] boardCells;
     private int rows;
     private int cols;
     private int totalMines;
+    private boolean firstReveal = true;
 
     public Grid(int rows, int cols, int totalMines) {
         this.rows = rows;
@@ -14,8 +15,6 @@ public class Grid {
         this.totalMines = totalMines;
         boardCells = new Cell[rows][cols];
         initializeBoardCells();
-        placeMines();
-        calculateNearByMines();
     }
 
     private void initializeBoardCells() {
@@ -26,17 +25,31 @@ public class Grid {
         }
     }
 
-    private void placeMines() {
+    private void placeMines(int firstRow, int firstCol) {
         Random random = new Random();
         int minesPlaced = 0;
         while (minesPlaced < totalMines) {
             int row = random.nextInt(rows);
             int col = random.nextInt(cols);
-            if (!boardCells[row][col].isMine()) {
+            if (!boardCells[row][col].isMine() && 
+                (row != firstRow || col != firstCol) && 
+                !hasMinesNearby(row, col)) {
                 boardCells[row][col].setMine();
                 minesPlaced++;
             }
         }
+        calculateNearByMines();
+    }
+
+    private boolean hasMinesNearby(int row, int col) {
+        for (int yAxis = row - 1; yAxis <= row + 1; yAxis++) {
+            for (int xAxis = col - 1; xAxis <= col + 1; xAxis++) {
+                if (yAxis >= 0 && yAxis < rows && xAxis >= 0 && xAxis < cols && boardCells[yAxis][xAxis].isMine()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void calculateNearByMines() {
@@ -59,17 +72,23 @@ public class Grid {
                 }
             }
         }
-        return count;        
+        return count;
     }
 
     public boolean revealCell(int row, int col) {
         if (boardCells[row][col].isRevealed()) {
             return true;
         }
+        if (firstReveal) {
+            firstReveal = false;
+            placeMines(row, col); 
+        }
+
         if (boardCells[row][col].isMine()) {
             return false;
         }
         boardCells[row][col].reveal();
+
         if (boardCells[row][col].getNearbyMines() == 0) {
             for (int yAxis = row - 1; yAxis <= row + 1; yAxis++) {
                 for (int xAxis = col - 1; xAxis <= col + 1; xAxis++) {
@@ -128,5 +147,9 @@ public class Grid {
             }
         }
         return true;
+    }
+
+    public Cell getCell(int row, int col) {
+        return boardCells[row][col];
     }
 }
