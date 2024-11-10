@@ -1,12 +1,28 @@
 package com.padawansduckscoders.buscaminas.controller;
 
+import java.io.IOException;
+import java.util.Optional;
+
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
+import javafx.scene.control.TextInputDialog;
 
 public class MenuController {
     @FXML
@@ -15,13 +31,33 @@ public class MenuController {
     private VBox vboxMenuButtons, vboxPlayButtons;
     @FXML
     private HBox hboxPlayButtons;
+    @FXML
+    private AnchorPane menuContainer;
+    @FXML
+    private Text textGame;
     
     private HostServices hostServices;
 
-    private final String BUTTONSTYLE = "-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #383838; -fx-border-color: #ffffff;";
+    private final String BUTTON_STYLE_DEFAULT = "-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #383838; -fx-border-color: #ffffff;";
+    private final String BUTTON_STYLE_HOVER = "-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #2C2C2C; -fx-border-color: #ff0000;";
+    private final Color TEXT_COLOR_DEFAULT = Color.valueOf("#ffffff");
+    private final Color TEXT_COLOR_HOVER = Color.valueOf("#ff0000");
+    private int rows = 8;
+    private int cols = 8;
+    private int mines = 10;
 
     public void setHostServices(HostServices hostServices) {
         this.hostServices = hostServices;
+    }
+
+    private void applyDefaultStyle(Button button) {
+        button.setStyle(BUTTON_STYLE_DEFAULT);
+        button.setTextFill(TEXT_COLOR_DEFAULT);
+    }
+
+    private void applyHoverStyle(Button button) {
+        button.setStyle(BUTTON_STYLE_HOVER);
+        button.setTextFill(TEXT_COLOR_HOVER);
     }
 
     @FXML
@@ -33,14 +69,12 @@ public class MenuController {
 
     @FXML
     protected void onPlayMouseEntered() {
-        buttonPlay.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonPlay.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonPlay);
     }
 
     @FXML
     protected void onPlayMouseExited() {
-        buttonPlay.setStyle(BUTTONSTYLE);
-        buttonPlay.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonPlay);
     }
 
     @FXML
@@ -52,14 +86,12 @@ public class MenuController {
 
     @FXML
     protected void onReportMouseEntered() {
-        buttonReport.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonReport.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonReport);
     }
 
     @FXML
     protected void onReportMouseExited() {
-        buttonReport.setStyle(BUTTONSTYLE);
-        buttonReport.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonReport);
     }
 
     @FXML
@@ -69,99 +101,167 @@ public class MenuController {
 
     @FXML
     protected void onExitMouseEntered() {
-        buttonExit.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonExit.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonExit);
     }
 
     @FXML
     protected void onExitMouseExited() {
-        buttonExit.setStyle(BUTTONSTYLE);
-        buttonExit.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonExit);
     }
 
     @FXML
     protected void onEasyButtonClick() {
-        System.out.println("easy");
+        rows = 8;
+        cols = 8;
+        mines = 10;
+        textGame.setText("8x8 10");
     }
 
     @FXML
     protected void onEasyMouseEntered() {
-        buttonEasy.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonEasy.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonEasy);
     }
 
     @FXML
     protected void onEasyMouseExited() {
-        buttonEasy.setStyle(BUTTONSTYLE);
-        buttonEasy.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonEasy);
     }
 
     @FXML
     protected void onNormalButtonClick() {
-        System.out.println("normal");
+        rows = 16;
+        cols = 16;
+        mines = 40;
+        textGame.setText("16x16 40");
     }
 
     @FXML
     protected void onNormalMouseEntered() {
-        buttonNormal.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonNormal.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonNormal);
     }
 
     @FXML
     protected void onNormalMouseExited() {
-        buttonNormal.setStyle(BUTTONSTYLE);
-        buttonNormal.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonNormal);
     }
 
     @FXML
     protected void onHardButtonClick() {
-        System.out.println("hard");
+        rows = 16;
+        cols = 31;
+        mines = 99;
+        textGame.setText("16x31 99");
     }
 
     @FXML
     protected void onHardMouseEntered() {
-        buttonHard.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonHard.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonHard);
     }
 
     @FXML
     protected void onHardMouseExited() {
-        buttonHard.setStyle(BUTTONSTYLE);
-        buttonHard.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonHard);
     }
 
     @FXML
     protected void onCustomButtonClick() {
-        System.out.println("custom");
+        TextInputDialog rowsDialog = new TextInputDialog();
+        rowsDialog.setTitle("Personalizar");
+        rowsDialog.setHeaderText("Ingrese las filas (entre 8 y 24):");
+        rowsDialog.setContentText("Filas:");
+        Optional<String> rowsResult = rowsDialog.showAndWait();
+        if (rowsResult.isEmpty() || !isIntegerInRange(rowsResult.get(), 8, 24)) {
+            showAlert("Error", "Solo se permiten números enteros entre 8 y 24 para las filas.");
+            return;
+        }
+        TextInputDialog colsDialog = new TextInputDialog();
+        colsDialog.setTitle("Personalizar");
+        colsDialog.setHeaderText("Ingrese las columnas (entre 8 y 32):");
+        colsDialog.setContentText("Columnas:");
+        Optional<String> colsResult = colsDialog.showAndWait();
+        if (colsResult.isEmpty() || !isIntegerInRange(colsResult.get(), 8, 32)) {
+            showAlert("Error", "Solo se permiten números enteros entre 8 y 32 para las columnas.");
+            return;
+        }
+        int totalCells = Integer.parseInt(rowsResult.get()) * Integer.parseInt(colsResult.get());
+        int maxMines = totalCells / 3;
+        TextInputDialog minesDialog = new TextInputDialog();
+        minesDialog.setTitle("Personalizar");
+        minesDialog.setHeaderText("Ingrese el número de minas (entre 1 y " + maxMines + "):");
+        minesDialog.setContentText("Minas:");
+        Optional<String> minesResult = minesDialog.showAndWait();
+        if (minesResult.isEmpty() || !isIntegerInRange(minesResult.get(), 1, maxMines)) {
+            showAlert("Error", "Solo se permiten números enteros entre 1 y " + maxMines + " para las minas.");
+            return;
+        }
+        rows = Integer.parseInt(rowsResult.get());
+        cols = Integer.parseInt(colsResult.get());
+        mines = Integer.parseInt(minesResult.get());
+        textGame.setText(rows + "x" + cols + " " + mines);
+    }
+
+    private boolean isIntegerInRange(String input, int min, int max) {
+        try {
+            int value = Integer.parseInt(input);
+            return value >= min && value <= max;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML
     protected void onCustomMouseEntered() {
-        buttonCustom.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonCustom.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonCustom);
     }
 
     @FXML
     protected void onCustomMouseExited() {
-        buttonCustom.setStyle(BUTTONSTYLE);
-        buttonCustom.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonCustom);
     }
 
     @FXML
-    protected void onStartGameButtonClick() {
-        System.out.println("StartGame");
+    protected void onStartGameButtonClick() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/padawansduckscoders/buscaminas/view/buscaminas-game.fxml"));
+        Parent root = loader.load();
+        GameController gameController = loader.getController();
+        gameController.initialize(rows, cols, mines);
+        Scene scene = menuContainer.getScene();
+        root.translateXProperty().set(scene.getWidth());
+        AnchorPane parentContainer = (AnchorPane) scene.getRoot();
+        parentContainer.getChildren().add(root);
+        AnchorPane.setLeftAnchor(parentContainer.getChildren().get(1), 0.00);
+        AnchorPane.setRightAnchor(parentContainer.getChildren().get(1), 0.00);
+        AnchorPane.setTopAnchor(parentContainer.getChildren().get(1), 0.00);
+        AnchorPane.setBottomAnchor(parentContainer.getChildren().get(1), 0.00);
+        Timeline timeline = new Timeline();
+        KeyValue keyValue = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.2), keyValue);
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.setOnFinished(event1 -> {
+            parentContainer.getChildren().remove(menuContainer);
+            System.out.println(parentContainer.getChildren().size());
+
+        });
+        timeline.play();
     }
+
 
     @FXML
     protected void onStartGameMouseEntered() {
-        buttonStartGame.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonStartGame.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonStartGame);
     }
 
     @FXML
     protected void onStartGameMouseExited() {
-        buttonStartGame.setStyle(BUTTONSTYLE);
-        buttonStartGame.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonStartGame);
     }
 
     @FXML
@@ -173,13 +273,11 @@ public class MenuController {
 
     @FXML
     protected void onBackMouseEntered() {
-        buttonBack.setStyle(BUTTONSTYLE + "-fx-background-color: #2C2C2C; -fx-border-color: #ff0000;");
-        buttonBack.setTextFill(Color.valueOf("#ff0000"));
+        applyHoverStyle(buttonBack);
     }
 
     @FXML
     protected void onBackMouseExited() {
-        buttonBack.setStyle(BUTTONSTYLE);
-        buttonBack.setTextFill(Color.valueOf("#ffffff"));
+        applyDefaultStyle(buttonBack);
     }
 }
