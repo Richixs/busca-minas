@@ -45,8 +45,10 @@ public class GameController {
         int finalRow = row;
         int finalCol = col;
         button.setOnAction(event -> handleButtonClick(finalRow, finalCol, button));
+        button.setOnContextMenuRequested(event -> button.setStyle("-fx-background-color: #FFCC00; -fx-border-color: #ffffff; -fx-border-width: 0.8px; -fx-background-radius: 10; -fx-border-radius: 10;"));
         return button;
     }
+    
 
     private void handleButtonClick(int row, int col, Button button) {
         boolean isCellRevealed = grid.revealCell(row, col);
