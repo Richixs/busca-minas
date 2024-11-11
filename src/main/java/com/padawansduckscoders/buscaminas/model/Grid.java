@@ -33,7 +33,7 @@ public class Grid {
             int col = random.nextInt(cols);
             if (!boardCells[row][col].isMine() && 
                 (row != firstRow || col != firstCol) && 
-                !hasMinesNearby(row, col)) {
+                !neighborOfFirstReveal(firstRow, firstCol, row, col)) {1
                 boardCells[row][col].setMine();
                 minesPlaced++;
             }
@@ -41,15 +41,10 @@ public class Grid {
         calculateNearByMines();
     }
 
-    private boolean hasMinesNearby(int row, int col) {
-        for (int yAxis = row - 1; yAxis <= row + 1; yAxis++) {
-            for (int xAxis = col - 1; xAxis <= col + 1; xAxis++) {
-                if (yAxis >= 0 && yAxis < rows && xAxis >= 0 && xAxis < cols && boardCells[yAxis][xAxis].isMine()) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    private boolean neighborOfFirstReveal(int firstRow, int firstCol, int row, int col) {
+        int rowDifference = Math.abs(firstRow - row);
+        int colDifference = Math.abs(firstCol - col);
+        return (rowDifference <= 2 && colDifference <= 2) && !(row == firstRow && col == firstCol);
     }
 
     private void calculateNearByMines() {
