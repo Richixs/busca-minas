@@ -103,33 +103,6 @@ public class Grid {
         return true;
     }
 
-    public void displayBoard() {
-        System.out.print("  ");
-        for (int col = 0; col < boardCells[0].length; col++) {
-            System.out.print(col + " ");
-        }
-        System.out.print("\n  ");
-        for (int col = 0; col < boardCells[0].length; col++) {
-            System.out.print("_ ");
-        }
-        System.out.println();
-        for (int i = 0; i < rows; i++) {
-            System.out.print(i + "|");
-            for (int j = 0; j < cols; j++) {
-                if (boardCells[i][j].isRevealed()) {
-                    if (boardCells[i][j].isMine()) {
-                        System.out.print("* ");
-                    } else {
-                        System.out.print(boardCells[i][j].getNearbyMines() + " ");
-                    }
-                } else {
-                    System.out.print("- ");
-                }
-            }
-            System.out.println();
-        }
-    }
-
     public int getRows() {
         return rows;
     }
@@ -151,5 +124,9 @@ public class Grid {
 
     public Cell getCell(int row, int col) {
         return boardCells[row][col];
+    }
+
+    public Cell[][] getBoardCells() {
+        return boardCells;
     }
 }

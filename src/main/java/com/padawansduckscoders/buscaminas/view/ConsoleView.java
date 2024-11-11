@@ -2,6 +2,8 @@ package com.padawansduckscoders.buscaminas.view;
 
 import java.util.Scanner;
 import com.padawansduckscoders.buscaminas.controller.GameControllerCli;
+import com.padawansduckscoders.buscaminas.model.Cell;
+import com.padawansduckscoders.buscaminas.model.Grid;
 
 public class ConsoleView {
     private GameControllerCli gameController;
@@ -69,19 +71,48 @@ public class ConsoleView {
 
     public void startGame() {
         System.out.println("Welcome to Minesweeper!");
-        gameController.displayBoard();
+        displayBoard();
         
         while (!gameController.isGameOver()) {
             int row = getValidInput("Enter row: ", 0, gameController.getRows() - 1);
             int col = getValidInput("Enter column: ", 0, gameController.getCols() - 1);
             gameController.revealCell(row, col);
-            gameController.displayBoard();
+            displayBoard();
         }
         
         if (gameController.isGameWon()) {
             System.out.println("Congratulations! You've cleared the board!");
         } else {
             System.out.println("Game over! You hit a mine.");
+        }
+    }
+
+    private void displayBoard() {
+        Grid grid = gameController.getGrid();
+        Cell[][] boardCells = grid.getBoardCells();
+        System.out.print("  ");
+        for (int col = 0; col < boardCells[0].length; col++) {
+            System.out.print(col + " ");
+        }
+        System.out.print("\n  ");
+        for (int col = 0; col < boardCells[0].length; col++) {
+            System.out.print("_ ");
+        }
+        System.out.println();
+        for (int i = 0; i < gameController.getRows(); i++) {
+            System.out.print(i + "|");
+            for (int j = 0; j < gameController.getCols(); j++) {
+                if (boardCells[i][j].isRevealed()) {
+                    if (boardCells[i][j].isMine()) {
+                        System.out.print("* ");
+                    } else {
+                        System.out.print(boardCells[i][j].getNearbyMines() + " ");
+                    }
+                } else {
+                    System.out.print("- ");
+                }
+            }
+            System.out.println();
         }
     }
 }

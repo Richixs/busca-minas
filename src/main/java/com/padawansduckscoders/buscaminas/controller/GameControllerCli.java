@@ -1,5 +1,6 @@
 package com.padawansduckscoders.buscaminas.controller;
 
+import com.padawansduckscoders.buscaminas.model.Cell;
 import com.padawansduckscoders.buscaminas.model.Grid;
 
 public class GameControllerCli {
@@ -34,10 +35,6 @@ public class GameControllerCli {
         return gameOver;
     }
 
-    public void displayBoard() {
-        grid.displayBoard();
-    }
-
     public boolean isGameWon() {
         return grid.isGameWon();
     }
@@ -48,5 +45,9 @@ public class GameControllerCli {
     
     public int getCols() {
         return grid.getCols();
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 }
