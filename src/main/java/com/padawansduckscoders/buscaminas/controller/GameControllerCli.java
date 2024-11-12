@@ -1,6 +1,5 @@
 package com.padawansduckscoders.buscaminas.controller;
 
-import com.padawansduckscoders.buscaminas.model.Cell;
 import com.padawansduckscoders.buscaminas.model.Grid;
 
 public class GameControllerCli {

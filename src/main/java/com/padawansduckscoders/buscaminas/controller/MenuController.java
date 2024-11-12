@@ -246,9 +246,9 @@ public class MenuController {
         KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.2), keyValue);
         timeline.getKeyFrames().add(keyFrame);
         timeline.setOnFinished(event1 -> {
-            parentContainer.getChildren().remove(menuContainer);
-            System.out.println(parentContainer.getChildren().size());
-
+            vboxMenuButtons.setVisible(true);
+            vboxPlayButtons.setVisible(false);
+            hboxPlayButtons.setVisible(false);
         });
         timeline.play();
     }
