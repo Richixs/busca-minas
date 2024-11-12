@@ -33,7 +33,7 @@ public class Grid {
             int col = random.nextInt(cols);
             if (!boardCells[row][col].isMine() && 
                 (row != firstRow || col != firstCol) && 
-                !neighborOfFirstReveal(firstRow, firstCol, row, col)) {1
+                !neighborOfFirstReveal(firstRow, firstCol, row, col)) {
                 boardCells[row][col].setMine();
                 minesPlaced++;
             }
