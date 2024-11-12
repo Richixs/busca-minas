@@ -2,13 +2,23 @@ package com.padawansduckscoders.buscaminas.model;
 
 public class Cell {
     private boolean isMine;
+    private boolean isFlag;
     private boolean revealed;
     private int nearbyMines;
 
     public Cell() {
         this.isMine = false;
         this.revealed = false;
+        this.isFlag = false;
         this.nearbyMines = 0;
+    }
+
+    public boolean isFlag() {
+        return isFlag;
+    }
+
+    public void flag() {
+        isFlag = !isFlag;
     }
 
     public boolean isMine() {

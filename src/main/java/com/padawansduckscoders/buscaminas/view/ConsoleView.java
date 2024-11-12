@@ -69,6 +69,15 @@ public class ConsoleView {
         return value;
     }
 
+    private int getValidAction() {
+        int value = 1;
+        int input = scanner.nextInt();
+        if (input == 2) {
+            return input;
+        }
+        return value;
+    }
+
     public void startGame() {
         System.out.println("Welcome to Minesweeper!");
         displayBoard();
@@ -76,7 +85,15 @@ public class ConsoleView {
         while (!gameController.isGameOver()) {
             int row = getValidInput("Enter row: ", 0, gameController.getRows() - 1);
             int col = getValidInput("Enter column: ", 0, gameController.getCols() - 1);
-            gameController.revealCell(row, col);
+            System.out.println("Select action:");
+            System.out.println("1. Reveal cell");
+            System.out.println("2. Mark cell");
+            int action = getValidAction();
+            if (action == 1) {
+                gameController.revealCell(row, col);
+            } else {
+                gameController.flag(row, col);
+            }
             displayBoard();
         }
         
@@ -102,7 +119,9 @@ public class ConsoleView {
         for (int i = 0; i < gameController.getRows(); i++) {
             System.out.print(i + "|");
             for (int j = 0; j < gameController.getCols(); j++) {
-                if (boardCells[i][j].isRevealed()) {
+                if (boardCells[i][j].isFlag() && !boardCells[i][j].isRevealed()) {
+                    System.out.print("🚩");
+                } else if (boardCells[i][j].isRevealed()) {
                     if (boardCells[i][j].isMine()) {
                         System.out.print("* ");
                     } else {

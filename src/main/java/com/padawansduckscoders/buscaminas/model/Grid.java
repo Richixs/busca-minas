@@ -124,4 +124,8 @@ public class Grid {
     public Cell[][] getBoardCells() {
         return boardCells;
     }
+
+    public void flag(int row, int col) {
+        boardCells[row][col].flag();
+    }
 }

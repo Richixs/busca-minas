@@ -50,4 +50,8 @@ public class GameControllerCli {
     public Grid getGrid() {
         return grid;
     }
+
+    public void flag(int row, int col) {
+        grid.flag(row, col);
+    }
 }
