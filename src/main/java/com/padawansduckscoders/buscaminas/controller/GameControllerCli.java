@@ -34,10 +34,6 @@ public class GameControllerCli {
         return gameOver;
     }
 
-    public void displayBoard() {
-        grid.displayBoard();
-    }
-
     public boolean isGameWon() {
         return grid.isGameWon();
     }
@@ -48,5 +44,13 @@ public class GameControllerCli {
     
     public int getCols() {
         return grid.getCols();
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void flag(int row, int col) {
+        grid.flag(row, col);
     }
 }

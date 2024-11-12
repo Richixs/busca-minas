@@ -2,6 +2,8 @@ package com.padawansduckscoders.buscaminas.view;
 
 import java.util.Scanner;
 import com.padawansduckscoders.buscaminas.controller.GameControllerCli;
+import com.padawansduckscoders.buscaminas.model.Cell;
+import com.padawansduckscoders.buscaminas.model.Grid;
 
 public class ConsoleView {
     private GameControllerCli gameController;
@@ -67,15 +69,32 @@ public class ConsoleView {
         return value;
     }
 
+    private int getValidAction() {
+        int value = 1;
+        int input = scanner.nextInt();
+        if (input == 2) {
+            return input;
+        }
+        return value;
+    }
+
     public void startGame() {
         System.out.println("Welcome to Minesweeper!");
-        gameController.displayBoard();
+        displayBoard();
         
         while (!gameController.isGameOver()) {
             int row = getValidInput("Enter row: ", 0, gameController.getRows() - 1);
             int col = getValidInput("Enter column: ", 0, gameController.getCols() - 1);
-            gameController.revealCell(row, col);
-            gameController.displayBoard();
+            System.out.println("Select action:");
+            System.out.println("1. Reveal cell");
+            System.out.println("2. Mark cell");
+            int action = getValidAction();
+            if (action == 1) {
+                gameController.revealCell(row, col);
+            } else {
+                gameController.flag(row, col);
+            }
+            displayBoard();
         }
         
         if (gameController.isGameWon()) {
@@ -84,4 +103,37 @@ public class ConsoleView {
             System.out.println("Game over! You hit a mine.");
         }
     }
+
+    private void displayBoard() {
+        Grid grid = gameController.getGrid();
+        Cell[][] boardCells = grid.getBoardCells();
+    
+        System.out.print("   ");
+        for (int col = 0; col < boardCells[0].length; col++) {
+            System.out.print(String.format("%2d ", col));
+        }
+        System.out.print("\n   ");
+        for (int col = 0; col < boardCells[0].length; col++) {
+            System.out.print("-- ");
+        }
+        System.out.println();
+    
+        for (int i = 0; i < gameController.getRows(); i++) {
+            System.out.print(String.format("%2d|", i));
+            for (int j = 0; j < gameController.getCols(); j++) {
+                if (boardCells[i][j].isFlag() && !boardCells[i][j].isRevealed()) {
+                    System.out.print("🚩 ");
+                } else if (boardCells[i][j].isRevealed()) {
+                    if (boardCells[i][j].isMine()) {
+                        System.out.print(" * ");
+                    } else {
+                        System.out.print(String.format("%2d ", boardCells[i][j].getNearbyMines()));
+                    }
+                } else {
+                    System.out.print(" - ");
+                }
+            }
+            System.out.println();
+        }
+    }    
 }

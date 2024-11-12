@@ -35,7 +35,7 @@
       </VBox>
       <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-             <ImageView fitHeight="66.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+             <ImageView fx:id="title" fitHeight="66.0" fitWidth="500.0" onMouseClicked="#backMenu" pickOnBounds="true" preserveRatio="true">
                 <image>
                    <Image url="@../assets/TitleMine.png" />
                 </image>

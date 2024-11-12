@@ -1,26 +1,24 @@
 package com.padawansduckscoders.buscaminas.model;
 
 public class Cell {
-    private int row; 
-    private int col; 
     private boolean isMine;
+    private boolean isFlag;
     private boolean revealed;
     private int nearbyMines;
 
     public Cell() {
-        this.row = row;
-        this.col = col;
         this.isMine = false;
         this.revealed = false;
+        this.isFlag = false;
         this.nearbyMines = 0;
     }
 
-    public int getRow() {
-        return row;
+    public boolean isFlag() {
+        return isFlag;
     }
 
-    public int getCol() {
-        return col;
+    public void flag() {
+        isFlag = !isFlag;
     }
 
     public boolean isMine() {
