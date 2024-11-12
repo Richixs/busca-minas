@@ -44,7 +44,7 @@ public class Grid {
     private boolean neighborOfFirstReveal(int firstRow, int firstCol, int row, int col) {
         int rowDifference = Math.abs(firstRow - row);
         int colDifference = Math.abs(firstCol - col);
-        return (rowDifference <= 2 && colDifference <= 2) && !(row == firstRow && col == firstCol);
+        return (rowDifference <= 1 && colDifference <= 1) && !(row == firstRow && col == firstCol);
     }
 
     private void calculateNearByMines() {
