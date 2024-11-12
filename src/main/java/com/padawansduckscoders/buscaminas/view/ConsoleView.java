@@ -107,31 +107,33 @@ public class ConsoleView {
     private void displayBoard() {
         Grid grid = gameController.getGrid();
         Cell[][] boardCells = grid.getBoardCells();
-        System.out.print("  ");
+    
+        System.out.print("   ");
         for (int col = 0; col < boardCells[0].length; col++) {
-            System.out.print(col + " ");
+            System.out.print(String.format("%2d ", col));
         }
-        System.out.print("\n  ");
+        System.out.print("\n   ");
         for (int col = 0; col < boardCells[0].length; col++) {
-            System.out.print("_ ");
+            System.out.print("-- ");
         }
         System.out.println();
+    
         for (int i = 0; i < gameController.getRows(); i++) {
-            System.out.print(i + "|");
+            System.out.print(String.format("%2d|", i));
             for (int j = 0; j < gameController.getCols(); j++) {
                 if (boardCells[i][j].isFlag() && !boardCells[i][j].isRevealed()) {
-                    System.out.print("🚩");
+                    System.out.print("🚩 ");
                 } else if (boardCells[i][j].isRevealed()) {
                     if (boardCells[i][j].isMine()) {
-                        System.out.print("* ");
+                        System.out.print(" * ");
                     } else {
-                        System.out.print(boardCells[i][j].getNearbyMines() + " ");
+                        System.out.print(String.format("%2d ", boardCells[i][j].getNearbyMines()));
                     }
                 } else {
-                    System.out.print("- ");
+                    System.out.print(" - ");
                 }
             }
             System.out.println();
         }
-    }
+    }    
 }
