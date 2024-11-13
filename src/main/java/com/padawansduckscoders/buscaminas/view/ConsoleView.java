@@ -30,14 +30,15 @@ public class ConsoleView {
                 mines = 40;
                 break;
             case 3:
-                rows = 16;
-                cols = 31;
+                rows = 24;
+                cols = 32;
                 mines = 99;
                 break;
             case 4:
-                rows = getValidInput("Enter number of rows (1-16): ", 1, 16);
-                cols = getValidInput("Enter number of columns (1-31): ", 1, 31);
-                mines = getValidInput("Enter number of mines (0 or more): ", 0, Integer.MAX_VALUE);
+                rows = getValidInput("Enter number of rows (8-24): ", 8, 24);
+                cols = getValidInput("Enter number of columns (8-32): ", 8, 32);
+                int maxMines = (rows*cols)/3;
+                mines = getValidInput("Enter number of mines (0 or " + maxMines + "): ", 0, maxMines);
                 break;
         }
         gameController.startGame(rows, cols, mines);
