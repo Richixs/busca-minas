@@ -56,6 +56,7 @@ public class GameController {
                     showGameOver("¡Has ganado!", AlertType.INFORMATION);
                 }
             } else {
+                grid.revealAllMines();
                 updateGrid();
                 showGameOver("¡Has perdido!", AlertType.ERROR);
             }
@@ -74,14 +75,14 @@ public class GameController {
                 Cell cell = grid.getCell(row, col);
                 if (cell.isRevealed()) {
                     if (cell.isMine()) {
-                        button.setText("💣");
+                        button.setText("*");
                         button.setStyle("-fx-background-color: red; -fx-border-color: #ffffff; -fx-border-width: 0.8px; -fx-background-radius: 10; -fx-border-radius: 10; -fx-alignment: center;");
                     } else {
                         button.setText(cell.getNearbyMines() == 0 ? "" : String.valueOf(cell.getNearbyMines()));
                         button.setStyle("-fx-background-color: #A9A9A9; -fx-border-color: #ffffff; -fx-border-width: 0.8px; -fx-background-radius: 10; -fx-border-radius: 10;");
                     }
                 } else if (cell.isFlag()) {
-                    button.setText("🚩");
+                    button.setText("f");
                     button.setStyle("-fx-background-color: #FFCC00; -fx-border-color: #ffffff; -fx-border-width: 0.8px; -fx-background-radius: 10; -fx-border-radius: 10; -fx-alignment: center;");
                 } else {
                     button.setText("");
