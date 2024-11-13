@@ -1,5 +1,6 @@
 package com.padawansduckscoders.buscaminas.view;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import com.padawansduckscoders.buscaminas.controller.GameControllerCli;
 import com.padawansduckscoders.buscaminas.model.Cell;
@@ -15,16 +16,8 @@ public class ConsoleView {
     }
 
     public void showMenu() {
-        System.out.println("Select difficulty:");
-        System.out.println("1. Easy (8x8, 10 mines)");
-        System.out.println("2. Medium (16x16, 40 mines)");
-        System.out.println("3. Hard (16x31, 99 mines)");
-        System.out.println("4. Custom (Set your own size and mines)");
-        System.out.print("Choose an option: ");
-
-        int choice = scanner.nextInt();
+        int choice = getValidDifficulty();
         int rows = 0, cols = 0, mines = 0;
-
         switch (choice) {
             case 1:
                 rows = 8;
@@ -46,61 +39,102 @@ public class ConsoleView {
                 cols = getValidInput("Enter number of columns (1-31): ", 1, 31);
                 mines = getValidInput("Enter number of mines (0 or more): ", 0, Integer.MAX_VALUE);
                 break;
-            default:
-                System.out.println("Invalid option. Defaulting to Easy difficulty.");
-                rows = 8;
-                cols = 8;
-                mines = 10;
-                break;
         }
-
         gameController.startGame(rows, cols, mines);
     }
 
     private int getValidInput(String message, int min, int max) {
-        int value;
-        do {
+        int value = 0;
+        boolean valid = false;
+        while (!valid) {
             System.out.print(message);
-            value = scanner.nextInt();
-            if (value < min || value > max) {
-                System.out.println("The value must be between " + min + " and " + max + ". Please try again.");
+            try {
+                value = scanner.nextInt();
+                if (value < min || value > max) {
+                    System.out.println("The value must be between " + min + " and " + max + ". Please try again.");
+                } else {
+                    valid = true;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Please enter a valid integer.");
+                scanner.next();
             }
-        } while (value < min || value > max);
+        }
         return value;
     }
 
-    private int getValidAction() {
-        int value = 1;
-        int input = scanner.nextInt();
-        if (input == 2) {
-            return input;
+    private int getValidDifficulty() {
+        int input = 0;
+        boolean valid = false;
+        while (!valid) {
+            try {
+                System.out.println("Select difficulty:");
+                System.out.println("1. Easy (8x8, 10 mines)");
+                System.out.println("2. Medium (16x16, 40 mines)");
+                System.out.println("3. Hard (16x31, 99 mines)");
+                System.out.println("4. Custom (Set your own size and mines)");
+                System.out.print("Choose an option: ");
+                input = scanner.nextInt();
+                if (input < 1 || input > 4) {
+                    throw new IllegalArgumentException("The number must be 1 or 4.");
+                }
+                valid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Error: You must enter an integer.");
+                scanner.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
-        return value;
+        return input;
+    }
+
+    private int getValidAction() {
+        int input = 0;
+        boolean valid = false;
+        while (!valid) {
+            try {
+                System.out.println("Select action:");
+                System.out.println("1. Reveal cell");
+                System.out.println("2. Mark cell");
+                input = scanner.nextInt();
+                if (input < 1 || input > 2) {
+                    throw new IllegalArgumentException("The number must be 1 or 2.");
+                }
+                valid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Error: You must enter an integer.");
+                scanner.next();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return input;
     }
 
     public void startGame() {
         System.out.println("Welcome to Minesweeper!");
         displayBoard();
-        
         while (!gameController.isGameOver()) {
             int row = getValidInput("Enter row: ", 0, gameController.getRows() - 1);
             int col = getValidInput("Enter column: ", 0, gameController.getCols() - 1);
-            System.out.println("Select action:");
-            System.out.println("1. Reveal cell");
-            System.out.println("2. Mark cell");
             int action = getValidAction();
-            if (action == 1) {
-                gameController.revealCell(row, col);
-            } else {
-                gameController.flag(row, col);
+            switch (action) {
+                case 1:
+                    gameController.revealCell(row, col); 
+                    break;
+                case 2:
+                    gameController.flag(row, col);
+                    break;
             }
             displayBoard();
         }
-        
         if (gameController.isGameWon()) {
             System.out.println("Congratulations! You've cleared the board!");
         } else {
             System.out.println("Game over! You hit a mine.");
+            gameController.getGrid().revealAllMines();
+            displayBoard();
         }
     }
 
@@ -125,7 +159,7 @@ public class ConsoleView {
                     System.out.print("🚩 ");
                 } else if (boardCells[i][j].isRevealed()) {
                     if (boardCells[i][j].isMine()) {
-                        System.out.print(" * ");
+                        System.out.print("💣 ");
                     } else {
                         System.out.print(String.format("%2d ", boardCells[i][j].getNearbyMines()));
                     }

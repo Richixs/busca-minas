@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="720.0" prefWidth="620.0" style="-fx-background-color: #1B1B1B;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.padawansduckscoders.buscaminas.controller.MenuController">
+<AnchorPane prefHeight="720.0" prefWidth="620.0" style="-fx-background-color: #1B1B1B;" xmlns="http://javafx.com/javafx/17.0.10" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.padawansduckscoders.buscaminas.controller.MenuController">
    <children>
       <AnchorPane fx:id="menuContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="620.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

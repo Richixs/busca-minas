@@ -117,6 +117,16 @@ public class Grid {
         return true;
     }
 
+    public void revealAllMines() {
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (getCell(row, col).isMine()) {
+                    getCell(row, col).reveal();
+                }
+            }
+        }
+    }
+
     public Cell getCell(int row, int col) {
         return boardCells[row][col];
     }
